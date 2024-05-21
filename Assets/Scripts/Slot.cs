@@ -40,20 +40,20 @@ public class Slot
         _nextItem = _newItem;
     }
 
-    public async void Roll()
+    public IEnumerator Roll()
     {
         int rollCount = Random.Range(_viewSettings.MinRollingCycle, _viewSettings.MaxRollingCycle);
         
         if (!_isRolling)
         {
             _isRolling = true;
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < rollCount; i++)
             {
                 SlotItem newItem = (SlotItem)Random.Range(0, _viewSettings.ItemSettings.Count-1);
                 SetNewItem(newItem);
                 
                 SetupSlotWithNewItem();
-                await _view.UpdateSlotWithNewItem(_newItem);
+                yield return _view.UpdateSlotWithNewItem(_newItem);
             }
         }
 

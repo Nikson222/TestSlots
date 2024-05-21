@@ -30,37 +30,34 @@ namespace DefaultNamespace
             _nextItemImage.sprite = settings.GetItemSprite(SlotItem.Seven);
         }
 
-        public async Task UpdateSlotWithNewItem(SlotItem _newItem)
+        public Coroutine UpdateSlotWithNewItem(SlotItem newItem)
         {
-            await WaitForAnimationToEnd(_newItem);
+            var routine = StartCoroutine(WaitForAnimationToEnd(newItem));
+            return routine;
         }
 
-
-        private async Task WaitForAnimationToEnd(SlotItem _newItem)
+        private IEnumerator WaitForAnimationToEnd(SlotItem _newItem)
         {
             _animator.SetBool(ANIMATION_PARAMETR, true);
+            Canvas.ForceUpdateCanvases();
 
-            
-            await Task.Yield();
-            await Task.Yield();
-
+            yield return null;
             
             AnimatorStateInfo stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
             while (stateInfo.IsName("SlotRolling") && stateInfo.normalizedTime < 1.0f)
             {
-                await Task.Yield();
+                yield return null;
                 stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
             }
 
-            
-            _animator.SetBool(ANIMATION_PARAMETR, false);
-
-            await Task.Yield(); 
-            
             _previousItemImage.sprite = _mainItemImage.sprite;
             _mainItemImage.sprite = _nextItemImage.sprite;
             _nextItemImage.sprite = _newItemImage.sprite;
             _newItemImage.sprite = _slotViewSettings.GetItemSprite(_newItem);
+            
+            _animator.SetBool(ANIMATION_PARAMETR, false);
+
+            yield return null;
         }
     }
 }

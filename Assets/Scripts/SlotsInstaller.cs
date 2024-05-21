@@ -35,9 +35,9 @@ public class SlotsInstaller : MonoInstaller
         if (!_leftSlotModel._isRolling && !_middleSlotModel._isRolling && !_rightSlotModel._isRolling)
         {
             print("spin");
-            _leftSlotModel.Roll();
-            _middleSlotModel.Roll();
-            _rightSlotModel.Roll();
+            StartCoroutine(_leftSlotModel.Roll());
+            StartCoroutine(_middleSlotModel.Roll());
+            StartCoroutine(_rightSlotModel.Roll());
         }
     }
 }
