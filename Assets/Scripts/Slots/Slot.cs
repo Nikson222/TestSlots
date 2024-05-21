@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
-using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Slot
 {
@@ -17,6 +18,7 @@ public class Slot
 
     public bool _isRolling = false;
 
+    public event Action OnRollEnd;
     public Slot(SlotView view, SlotViewSettings viewSettings)
     {
         _view = view;
@@ -56,7 +58,8 @@ public class Slot
                 yield return _view.UpdateSlotWithNewItem(_newItem);
             }
         }
-
+        
+        OnRollEnd?.Invoke();
         _isRolling = false;
     }
 }
