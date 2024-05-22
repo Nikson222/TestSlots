@@ -5,5 +5,6 @@
     Cherry,
     Watermelon,
     Lemon,
-    Grape
+    Grape,
+    None
 }

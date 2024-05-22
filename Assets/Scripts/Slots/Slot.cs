@@ -17,6 +17,7 @@ public class Slot
     private SlotView _view;
 
     public bool _isRolling = false;
+    public SlotItem MainItem => _mainItem;
 
     public event Action OnRollEnd;
     public Slot(SlotView view, SlotViewSettings viewSettings)
@@ -30,16 +31,12 @@ public class Slot
         _nextItem = SlotItem.Seven;
     }
 
-    public void SetNewItem(SlotItem item)
-    {
-        _newItem = item;
-    }
-
-    private void SetupSlotWithNewItem()
+    private void SetupSlotWithNewItem(SlotItem newItem)
     {
         _previousItem = _mainItem;
         _mainItem = _nextItem;
         _nextItem = _newItem;
+        _newItem = newItem;
     }
 
     public IEnumerator Roll()
@@ -51,10 +48,9 @@ public class Slot
             _isRolling = true;
             for (int i = 0; i < rollCount; i++)
             {
-                SlotItem newItem = (SlotItem)Random.Range(0, _viewSettings.ItemSettings.Count-1);
-                SetNewItem(newItem);
+                SlotItem newItem = (SlotItem)Random.Range(0, _viewSettings.ItemSettings.Count);
                 
-                SetupSlotWithNewItem();
+                SetupSlotWithNewItem(newItem);
                 yield return _view.UpdateSlotWithNewItem(_newItem);
             }
         }

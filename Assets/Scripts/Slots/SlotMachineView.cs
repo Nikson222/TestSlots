@@ -47,6 +47,8 @@ namespace DefaultNamespace
             else 
                 _spinButtonImage.sprite = _spinButtonNonActiveSprite;
             
+            SetActiveBetsButtons(!isActive);
+            
             _spinButton.interactable = !isActive;
             _spinButtonImage.SetNativeSize();
         }
@@ -55,13 +57,19 @@ namespace DefaultNamespace
         {
             button.interactable = !isActive;
             image.sprite = isActive ? ActiveBetSprite : NonActiveBetSprite;
-            image.SetNativeSize();
+            //image.SetNativeSize();
         }
 
         private void ClickBetButton(BetButton button)
         {
             foreach (var betButton in _betButtons)
                 SetActiveBetSprite(betButton.Button, betButton.Button.image, betButton.Bet == button.Bet);
+        }
+
+        private void SetActiveBetsButtons(bool isActive)
+        {
+            foreach (var betButton in _betButtons)
+                betButton.Button.interactable = isActive;
         }
     }
 

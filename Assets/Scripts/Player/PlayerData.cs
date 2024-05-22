@@ -12,9 +12,10 @@ namespace Player
         public event Action<bool> OnSpinResponse;
         public event Action<int> OnCoinsChanged;
         
-        public PlayerData()
+        public PlayerData(RewardsController rewardsController)
         {
-            _coins = PlayerPrefs.GetInt("coins", 10);
+            _coins = PlayerPrefs.GetInt("coins", 100);
+            rewardsController.OnCoinsRewardGiven += (x) => Coins += x;
         }
 
         public int Coins

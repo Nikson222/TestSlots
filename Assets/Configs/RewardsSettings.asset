@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbe49857998c475458072241c56398b0, type: 3}
+  m_Name: RewardsSettings
+  m_EditorClassIdentifier: 
+  _rewardSettings:
+  - combination:
+      _item1: 1
+      _item2: 1
+      _item3: 1
+    _type: 0
+    count: 2
+  - combination:
+      _item1: 2
+      _item2: 2
+      _item3: 2
+    _type: 0
+    count: 4
+  - combination:
+      _item1: 3
+      _item2: 3
+      _item3: 3
+    _type: 0
+    count: 6
+  - combination:
+      _item1: 4
+      _item2: 4
+      _item3: 4
+    _type: 0
+    count: 10
+  - combination:
+      _item1: 5
+      _item2: 5
+      _item3: 5
+    _type: 1
+    count: 2
+  - combination:
+      _item1: 0
+      _item2: 0
+      _item3: 0
+    _type: 0
+    count: 100
+  - combination:
+      _item1: 1
+      _item2: 1
+      _item3: 0
+    _type: 0
+    count: 2
+  - combination:
+      _item1: 2
+      _item2: 2
+      _item3: 0
+    _type: 1
+    count: 1

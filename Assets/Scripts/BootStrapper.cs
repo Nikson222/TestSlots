@@ -10,6 +10,8 @@ using Zenject;
 public class BootStrapper : MonoInstaller
 {
     [SerializeField] private SlotViewSettings _viewSettings;
+    [SerializeField] private RewardsSettings _rewardsSettings;
+    
     [SerializeField] private SlotView _leftSlot;
     [SerializeField] private SlotView _middleSlot;
     [SerializeField] private SlotView _rightSlot;
@@ -28,14 +30,17 @@ public class BootStrapper : MonoInstaller
     {
         CreateSlotsModels();
         Container.Bind<SlotViewSettings>().FromInstance(_viewSettings).AsSingle();
+        Container.Bind<RewardsSettings>().FromInstance(_rewardsSettings).AsSingle();
         Container.Bind<SlotMachineView>().FromInstance(_slotMachineView).AsSingle();
         
         Container.Bind<PlayerData>().AsSingle().NonLazy();
+        Container.Bind<RewardsController>().AsSingle().NonLazy();
         
         Container.Bind<PlayerView>().FromInstance(_playerView).AsSingle();
         
         Container.Bind<CoroutineRunner>().FromInstance(_coroutineRunner).AsSingle();
-        var slotsMachine = new SlotsMachine(_leftSlotModel, _middleSlotModel, _rightSlotModel, Container.Resolve<PlayerData>(), _coroutineRunner);
+        var slotsMachine = new SlotsMachine(_leftSlotModel, _middleSlotModel, _rightSlotModel, Container.Resolve<PlayerData>(), _coroutineRunner
+            , Container.Resolve<RewardsController>());
 
         Container.Bind<SlotsMachine>().FromInstance(slotsMachine).AsSingle();
     }
